@@ -21,6 +21,14 @@ The easiest way to install is directly from within VS Code (search extensions fo
 
 You can also install from the [VS Code Extension Marketplace](https://marketplace.visualstudio.com/items?itemName=quarto.quarto), the [Open VSX Registry](https://open-vsx.org/extension/quarto/quarto) or directly from a [VISX extension file](#visx-install).
 
+### Building from Source
+```
+# Need npm with a high enough version of node. 
+# Download nvm if you need to update node. 
+npm install -g @vscode/vsce
+yarn install --immutable --immutable-cache --check-cache
+vsce package
+```
 
 ## Render and Preview
 
