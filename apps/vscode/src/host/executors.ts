@@ -55,7 +55,7 @@ interface VSCodeCellExecutor extends CellExecutor {
   executeSelection?: () => Promise<void>;
 }
 
-const jupyterCellExecutor = (language: string) : VSCodeCellExecutor => ({
+const jupyterCellExecutor = (language: string): VSCodeCellExecutor => ({
   language,
   requiredExtension: ["ms-toolsai.jupyter"],
   requiredExtensionName: "Jupyter",
@@ -101,7 +101,15 @@ const reticulateCellExecutor: VSCodeCellExecutor = {
   requiredVersion: "2.4.0",
   execute: async (blocks: string[]) => {
     const code = blocks.join("\n").trim();
-    const pythonCode = pythonWithReticulate(code);
+
+    const rawPython = workspace.getConfiguration('quarto').get<boolean>('rawPython');
+    let pythonCode: string;
+    if (rawPython) {
+      pythonCode = code;
+    } else {
+      pythonCode = pythonWithReticulate(code);
+    }
+
     await commands.executeCommand("r.runSelection", pythonCode);
   },
 };
@@ -179,16 +187,16 @@ export function isDenoDocument(
   if (jupyterOption) {
     if (jupyterOption === "deno") {
       return true;
-    } else if (typeof(jupyterOption) === "object") {
-      const kernelspec = (jupyterOption as Record<string,unknown>)["kernelspec"];
-      if (typeof(kernelspec) === "object") {
+    } else if (typeof (jupyterOption) === "object") {
+      const kernelspec = (jupyterOption as Record<string, unknown>)["kernelspec"];
+      if (typeof (kernelspec) === "object") {
         return (kernelspec as JupyterKernelspec).name === "deno";
       }
     } else {
       return false;
     }
   }
- 
+
   // another explicit declaration of engine that isn't jupyter
   if (engineOption && engineOption !== "jupyter") {
     return false;

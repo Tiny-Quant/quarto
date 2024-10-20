@@ -975,6 +975,13 @@
           "default": true,
           "markdownDescription": "Use reticulate to execute Python cells within Knitr engine documents."
         },
+        "quarto.rawPython": {
+          "order": 26,
+          "scope": "window",
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable raw execution of python chunks (disables reticulate)."
+        }, 
         "quarto.mathjax.scale": {
           "order": 15,
           "scope": "window",
