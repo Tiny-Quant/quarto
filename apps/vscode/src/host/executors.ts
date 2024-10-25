@@ -61,13 +61,14 @@ const jupyterCellExecutor = (language: string): VSCodeCellExecutor => ({
   requiredExtensionName: "Jupyter",
   requiredVersion: "2021.8.0",
   execute: async (blocks: string[]) => {
+
     const useJupyterInterative = workspace.getConfiguration("quarto").get<boolean>("useJupyterInteractive");
     let execute_str: string;
     if (useJupyterInterative) {
-      execute_str = "r.runSelection"
+      execute_str = "jupyter.execSelectionInteractive";
     }
     else {
-      execute_str = "jupyter.execSelectionInteractive"
+      execute_str = "r.runSelection";
     }
 
     // if there is a cell magic then we need to execute cell-by-cell
