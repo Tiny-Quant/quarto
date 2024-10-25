@@ -982,6 +982,13 @@
           "default": true,
           "markdownDescription": "Enable raw execution of python chunks (disables reticulate)."
         }, 
+        "quarto.useJupyterInterative": {
+          "order": 27, 
+          "scope": "window", 
+          "type": "boolean", 
+          "default": false, 
+          "markdownDescription": "Enable Jupyter interactive mode."
+        }, 
         "quarto.mathjax.scale": {
           "order": 15,
           "scope": "window",
